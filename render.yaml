@@ -12,22 +12,22 @@ services:
     name: n8n-db-prm
     plan: free  # Ou "starter" para mais recursos
     region: us-east-1  # Escolha a região mais próxima (us, eu, etc.) 
-	runtime: docker
-	# dockerfilePath: Dockerfile  # Caminho para o Dockerfile (opcional)
+    runtime: docker
+    # dockerfilePath: Dockerfile  # Caminho para o Dockerfile (opcional)
     envVars:
       # Configurações do n8n
-	  - key: N8N_HOST
-	    value: n8n-db-prm.onrender.com
-	  - key: N8N_PORT
-	    value: 443
-	  - key: N8N_PROTOCOL
-	    value: https
-	  – key: N8N_BASIC_AUTH_ACTIVE
-	    value: “true”
+      - key: N8N_HOST
+        value: n8n-db-prm.onrender.com
+      - key: N8N_PORT
+        value: 443
+      - key: N8N_PROTOCOL
+        value: https
+      – key: N8N_BASIC_AUTH_ACTIVE
+        value: “true”
       – key: N8N_BASIC_AUTH_USER
-	    value: Paulo-Moreira-n8n
+        value: Paulo-Moreira-n8n
       – key: N8N_BASIC_AUTH_PASSWORD
-	    value: Prm.n8nio
+        value: Prm.n8nio
       - key: N8N_EDITOR_BASE_URL
         value: https://n8n-db-prm.onrender.com  # Substitua pela URL do seu app após a implantação
       - key: GENERIC_TIMEZONE
