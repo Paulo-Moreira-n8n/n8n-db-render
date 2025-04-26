@@ -1,0 +1,57 @@
+services:
+  # Banco de dados PostgreSQL
+  - type: postgres
+    name: n8n-db
+    plan: free  # Para produção, use "starter" ou superior
+    region: us-east-1
+    databaseName: n8n_db
+    user: n8n_user
+
+  # Serviço Principal: n8n em um contêiner Docker
+  - type: web
+    name: n8n-db-prm
+    plan: free  # Ou "starter" para mais recursos
+    region: us-east-1  # Escolha a região mais próxima (us, eu, etc.) 
+	runtime: docker
+	# dockerfilePath: Dockerfile  # Caminho para o Dockerfile (opcional)
+    envVars:
+      # Configurações do n8n
+	  - key: N8N_HOST
+	    value: n8n-db-prm.onrender.com
+	  - key: N8N_PORT
+	    value: 443
+	  - key: N8N_PROTOCOL
+	    value: https
+	  – key: N8N_BASIC_AUTH_ACTIVE
+	    value: “true”
+      – key: N8N_BASIC_AUTH_USER
+	    value: Paulo-Moreira-n8n
+      – key: N8N_BASIC_AUTH_PASSWORD
+	    value: Prm.n8nio
+      - key: N8N_EDITOR_BASE_URL
+        value: https://n8n-db-prm.onrender.com  # Substitua pela URL do seu app após a implantação
+      - key: GENERIC_TIMEZONE
+        value: America/Sao_Paulo  # Ajuste o fuso horário
+      # Configurações do PostgreSQL (vinculado ao serviço de banco de dados abaixo)
+      - key: N8N_DATABASE_TYPE
+        value: postgresdb
+      - key: DB_POSTGRESDB_DATABASE
+        fromDatabase:
+          name: n8n-db
+          property: database
+      - key: DB_POSTGRESDB_HOST
+        fromDatabase:
+          name: n8n-db
+          property: host
+      - key: DB_POSTGRESDB_PORT
+        fromDatabase:
+          name: n8n-db
+          property: port
+      - key: DB_POSTGRESDB_USER
+        fromDatabase:
+          name: n8n-db
+          property: user
+      - key: DB_POSTGRESDB_PASSWORD
+        fromDatabase:
+          name: n8n-db
+          property: password
