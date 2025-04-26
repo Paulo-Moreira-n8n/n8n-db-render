@@ -6,7 +6,6 @@ services:
     region: us-east-1
     databaseName: n8n_db
     user: n8n_user
-
   # Serviço Principal: n8n em um contêiner Docker
   - type: web
     name: n8n-db-prm
@@ -15,8 +14,7 @@ services:
     runtime: docker
     # dockerfilePath: Dockerfile  # Caminho para o Dockerfile (opcional)
     envVars:
-      # Configurações do n8n
-      - key: N8N_HOST
+      - key: N8N_HOST # Aqui começam as configurações do n8n
         value: n8n-db-prm.onrender.com
       - key: N8N_PORT
         value: 443
@@ -32,8 +30,7 @@ services:
         value: https://n8n-db-prm.onrender.com  # Substitua pela URL do seu app após a implantação
       - key: GENERIC_TIMEZONE
         value: America/Sao_Paulo  # Ajuste o fuso horário
-      # Configurações do PostgreSQL (vinculado ao serviço de banco de dados abaixo)
-      - key: N8N_DATABASE_TYPE
+      - key: N8N_DATABASE_TYPE # Aqui começam as configurações do PostgreSQL vinculado ao serviço de banco de dados
         value: postgresdb
       - key: DB_POSTGRESDB_DATABASE
         fromDatabase:
